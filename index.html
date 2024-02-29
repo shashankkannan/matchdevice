@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Example</title>
+  <style>
+    /* Default styles for all devices */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      padding: 10px;
+    }
+
+    section {
+      padding: 20px;
+    }
+
+    footer {
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      padding: 10px;
+    }
+
+    /* Mobile-specific styles */
+    @media only screen and (max-width: 767px) {
+      body {
+        font-size: 14px;
+      }
+
+      header,
+      footer {
+        font-size: 18px;
+      }
+    }
+
+    /* Tablet-specific styles */
+    @media only screen and (min-width: 768px) and (max-width: 1023px) {
+      body {
+        font-size: 16px;
+      }
+
+      header,
+      footer {
+        font-size: 20px;
+      }
+    }
+
+    /* Desktop-specific styles */
+    @media only screen and (min-width: 1024px) {
+      body {
+        font-size: 18px;
+      }
+
+      header,
+      footer {
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Match Device</h1>
+  </header>
+  <section>
+    <p>Let's figure out what type of device you are using!</p>
+  </section>
+
+  <footer>
+    <p>Got it, Thanks!</p>
+  </footer>
+
+  <script>
+    function updateDeviceType() {
+      var width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+      // device type based on width
+      var deviceType;
+      if (width <= 767) 
+      {
+        deviceType = "mobile";
+      } else if (width <= 1023) 
+      {
+        deviceType = "tablet";
+      } else 
+      {
+        deviceType = "desktop";
+      }
+      document.getElementById("deviceType").innerText = "Device Type: " + deviceType;
+      document.body.className = deviceType;
+    }
+    window.addEventListener("resize", updateDeviceType);
+    window.addEventListener("load", updateDeviceType);
+  </script>
+  <p id="deviceType">Device Type: Desktop</p>
+</body>
+</html>
