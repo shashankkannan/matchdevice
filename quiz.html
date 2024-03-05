@@ -105,6 +105,9 @@
             currentQuestion++;
             showQuestion();
         }
+        function openindex() {
+      window.open("index.html", "_blank");
+    }
 
         function showResult() {
             const resultContainer = document.getElementById('result');
@@ -132,6 +135,7 @@
         <h1>Welcome to the Personality Quiz!</h1>
         <p>Let's find the best program for you based on your personality.</p>
         <button onclick="startQuiz()">Start Quiz</button>
+        <button onclick="openindex()">Back to Index</button>
     </div>
 
     <div id="quiz-container" class="card"></div>
