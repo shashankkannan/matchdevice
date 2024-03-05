@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #ecf0f1; /* Updated background color */
+        }
+
+        .card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        #quiz-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .question {
+            margin-bottom: 10px;
+        }
+
+        .options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .option {
+            background-color: #3498db;
+            color: #fff;
+            padding: 10px;
+            cursor: pointer;
+            border: none;
+            text-align: center;
+            flex: 1 0 45%;
+        }
+
+        .option:hover {
+            background-color: #2980b9;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+    <script>
+        let currentQuestion = 0;
+        let answers = [];
+
+        function startQuiz() {
+            document.getElementById('start-container').style.display = 'none';
+            showQuestion();
+        }
+
+        function showQuestion() {
+            const questions = [
+                "What type of projects excite you the most?",
+                "How do you prefer to approach challenges?",
+                "Which area sparks your curiosity?",
+                "What mode of discovery do you find intriguing?",
+                "What aspect of learning captivates your interest?"
+            ];
+
+            const options = [
+                ["Hands-on and practical projects", "Research-oriented and theoretical projects"],
+                ["Facing challenges individually", "Collaborating with a team to overcome challenges"],
+                ["Computing and technology", "Mechanical and Automotive systems", "Civil Engineering and structures", "Biology and natural sciences"],
+                ["Exploring through experimentation and application", "Understanding through theories and concepts"],
+                ["The intricate world of computing", "The fascinating realm of mechanical and automotive systems", "The structural and creative aspects of civil engineering", "The wonders of biology and natural sciences"]
+            ];
+
+            if (currentQuestion < questions.length) {
+                const questionContainer = document.getElementById('quiz-container');
+                questionContainer.innerHTML = `<div class="question">${questions[currentQuestion]}</div>`;
+
+                const optionsContainer = document.createElement('div');
+                optionsContainer.classList.add('options');
+
+                options[currentQuestion].forEach((option, index) => {
+                    const button = document.createElement('button');
+                    button.classList.add('option');
+                    button.textContent = option;
+                    button.addEventListener('click', () => handleOptionClick(index));
+                    optionsContainer.appendChild(button);
+                });
+
+                questionContainer.appendChild(optionsContainer);
+            } else {
+                showResult();
+            }
+        }
+
+        function handleOptionClick(index) {
+            answers.push(index);
+            currentQuestion++;
+            showQuestion();
+        }
+
+        function showResult() {
+            const resultContainer = document.getElementById('result');
+            const programs = [
+                "Applied Computing - Course-based, hands-on training",
+                "MSc Computer Science - Thesis-based, research paper",
+                "MEng Civil Engineering - Study about building civil topics",
+                "MEng Mechanical/Automotive Engineering - Automobile and mechanical engineering topics",
+                "Biology - Biology-related studies"
+            ];
+
+            const suggestedProgram = programs[calculateResult()];
+            resultContainer.textContent = `Based on your responses, we suggest the following program for you: ${suggestedProgram}`;
+        }
+
+        function calculateResult() {
+            const result = answers.reduce((acc, value) => acc + value, 0);
+            return Math.floor(result / answers.length);
+        }
+    </script>
+</head>
+
+<body>
+    <div id="start-container" class="card">
+        <h1>Welcome to the Personality Quiz!</h1>
+        <p>Let's find the best program for you based on your personality.</p>
+        <button onclick="startQuiz()">Start Quiz</button>
+    </div>
+
+    <div id="quiz-container" class="card"></div>
+    <div id="result" class="card"></div>
+</body>
+
+</html>

@@ -75,6 +75,7 @@
   </header>
   <section>
     <p>Let's figure out what type of device you are using!</p>
+    <button onclick="openQuiz()">Take the Quiz</button>
   </section>
 
   <footer>
@@ -101,6 +102,9 @@
     }
     window.addEventListener("resize", updateDeviceType);
     window.addEventListener("load", updateDeviceType);
+    function openQuiz() {
+      window.open("quiz.html", "_blank");
+    }
   </script>
   <p id="deviceType">Device Type: Desktop</p>
 </body>
